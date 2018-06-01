@@ -7,9 +7,13 @@
 </head>
 <body>
 <h1>
-	Hello world! INDEX.JSP 
+	Hello world! Index.jsp 
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<form>
+	<input type="text" name="id"/>
+	<input type="password" name="pw"/>
+	<input type="submit"/>
+</form>
 </body>
 </html>
