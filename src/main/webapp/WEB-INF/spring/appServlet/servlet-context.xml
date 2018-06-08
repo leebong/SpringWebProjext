@@ -17,12 +17,37 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/" />
-		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="prefix" value="" />
+		<beans:property name="suffix" value="" />
 	</beans:bean>
-	
 	<context:component-scan base-package="kr.green.springwebproject.controller" />
 	
 	
+	<beans:bean id="loginInterceptor" class="kr.green.springwebproject.interceptor.LoginInterceptor">
+	</beans:bean>
 	
+	<beans:bean id = "authInterceptor" class="kr.green.springwebproject.interceptor.AuthInterceptor">
+	</beans:bean>
+	
+	<beans:bean id = "unauthInterceptor" class="kr.green.springwebproject.interceptor.UnauthInterceptor">
+	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/main"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/board/*"/> <!-- "/board/" 하위경로로 시작되는 하위메뉴에 대한 접속보안 -->
+			<mapping path="/modify"/> 
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/member/signup"/> <!-- "/member/" 하위경로로 시작되는 하위메뉴에 대한 접속보안 -->
+			<mapping path="/"/>
+			<beans:ref bean="unauthInterceptor"/>
+		</interceptor>
+		
+	</interceptors>
+		
 </beans:beans>

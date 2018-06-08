@@ -3,7 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.springwebproject.dao.UserMapper">
-    <select id="login" resultType="kr.green.springwebproject.dao.User">
-		select * from account where id = #{id} and pw = #{pw}
-	</select>
+	
+	  <select id="getId" resultType="String">
+	    select id from account where id = #{id}
+	  </select>
+	  <select id="getPw" resultType="String">
+	    select pw from account where id = #{id}
+	  </select>
+	  <select id="getEmail" resultType="String">
+	    select email from account where id = #{id}
+	  </select>
+	  <select id="getUser" resultType="kr.green.springwebproject.dao.User">
+	    select * from account where id = #{id}
+	  </select>
+	  <insert id="setUser">
+	    insert into account (id,pw,name,email) values (#{id}, #{pw},#{name},#{email})
+	  </insert>
+	  <select id="login" resultType="kr.green.springwebproject.dao.User">
+	  	select * from account where id = #{id} and pw = #{pw}
+	  </select>
+	  <select id="loginById" resultType="kr.green.springwebproject.dao.User">
+	  	select * from account where id = #{id}
+	  </select>
+	  <update id="updateUser">
+	    update account set pw=#{user.pw}, email=#{user.email}
+	    where id = #{user.id}
+	  </update>
+	  
+	
 </mapper>
